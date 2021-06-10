@@ -1,37 +1,97 @@
-<h2> Welcome to GitHub Pages </h2>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179401054-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-You can use the [editor on GitHub](https://github.com/uamroln/uamroln.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+  gtag('config', 'UA-179401054-1');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Matt Rolniak">
+<meta name="description" content="Sight Words">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://kit.fontawesome.com/eff118460a.js" crossorigin="anonymous"></script>
+<style>
+body, html{
+	height:100%;
+	margin:0;
+}
+.background{
+	height:100%;
+}
+</style>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+</head>
+<title>
+Nonsequitus Learning
+</title>
+<!-- <audio id="loadSound">
+	<source src="Assets/Alley Dream.mp3" type="audio/mp3">
+</audio> -->
+<audio id="rightSound">
+	<source src="Assets/smb_coin.wav" type="audio/wav">
+</audio>
+<audio id="wrongSound">
+	<source src="Assets/smb_pipe.wav" type="audio/wav">
+</audio>
+</head>
 
-<h3> Markdown </h3>
+<body>
+<!-- Main Header -->
+<div class="w3-container w3-blue-gray w3-wide" id="header">
+<h1>Nonsequitus Learning</h1>
+</div><!-- End Main header -->
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<!-- page outer background -->
+<div class="w3-container w3-blue background">
 
-```markdown
-Syntax highlighted code block
+<!-- Nav -->
+<div class="w3-bar w3-light-blue w3-border w3-round-xlarge"  id="nav">
 
-# Header 1
-## Header 2
-### Header 3
+<a href="index.html" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
+<a href="Math Flash Cards v1.3.html" class="w3-bar-item w3-button"><i class="fas fa-plus"></i> Math Addition Flash Cards</a>
+<a href="Sight Words v1.0.html" class="w3-bar-item w3-button"><i class="fas fa-book-reader"></i> Sight Words Flash Cards</a>
 
-- Bulleted
-- List
+</div><!-- End nav -->
 
-1. Numbered
-2. List
+<!-- page inner background -->
+<div class="w3-container w3-pale-blue background">
 
-**Bold** and _Italic_ and `Code` text
+<!-- onload modal 
+	<div class="w3-modal" id="directions">
+		<div class="w3-modal-content w3-light-grey w3-container">
+			<span onclick="toggleModal('directions')" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
+			<p>Put some instructions here!</p>
+		</div>
+	</div> -->
+	
+<!-- header -->
+<div class="w3-bar w3-panel w3-deep-purple w3-animate-top">
+<h2><span class="w3-bar-item w3-wide">Welcome!</span>
+	<div class="w3-bar-item w3-right">
+		<button class="w3-deep-purple w3-button" id="volume" onclick="muter()"><i class="fas fa-volume-mute"></i></button>
+	</div>
+</h2>
+</div> <!-- end header -->
+<div class="w3-animate-opacity">
+	<p>You have found Nonsequitus Learning. What a discovery! This site has some learning resources for early elementary school students.</p>
+	<p>Have you ever studied something using flash cards? The idea is to memorize the answers to basic questions so that you can answer them as quickly as possible. This site utilizes the same basic pricipal without all the shuffling around of little cards.</p>
+	<p> Yay for rote memorization! Let's get to it!</p>
+	<p> Use the navigation bar at the top to dive into the subject you want to study.</p>
+</div>
+</div> <!-- end inner background -->
+</div> <!-- end outer background -->
+</body>
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/uamroln/uamroln.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<!-- footer -->
+<div class="w3-container w3-blue">
+<footer class="w3-bar w3-light-blue w3-border w3-round-xlarge">
+	<a class="w3-bar-item w3-button" href="index.html"><i class="fas fa-home"></i> Home</a>
+</footer>
+</div>
+</html>
