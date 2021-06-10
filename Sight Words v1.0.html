@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179401054-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-179401054-1');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Matt Rolniak">
+<meta name="description" content="Sight Words">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://kit.fontawesome.com/eff118460a.js" crossorigin="anonymous"></script>
+<style>
+body, html{
+	height:100%;
+	margin:0;
+}
+.background{
+	height:100%;
+}
+</style>
+
+</head>
+<title>
+Nonsequitus Learning - Sight Words!
+</title>
+<!-- <audio id="loadSound">
+	<source src="Assets/Alley Dream.mp3" type="audio/mp3">
+</audio> -->
+<audio id="rightSound">
+	<source src="Assets/smb_coin.wav" type="audio/wav">
+</audio>
+<audio id="wrongSound">
+	<source src="Assets/smb_pipe.wav" type="audio/wav">
+</audio>
+</head>
+
+<body>
+<!-- Main Header -->
+<div class="w3-container w3-blue-gray w3-wide" id="header">
+<h1>Nonsequitus Learning</h1>
+</div><!-- End Main header -->
+
+<!-- page outer background -->
+<div class="w3-container w3-blue background">
+
+<!-- Nav -->
+<div class="w3-bar w3-light-blue w3-border w3-round-xlarge"  id="nav">
+
+<a href="index.html" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
+<a href="Math Flash Cards v1.3.html" class="w3-bar-item w3-button"><i class="fas fa-plus"></i> Math Addition Flash Cards</a>
+<a href="Sight Words v1.0.html" class="w3-bar-item w3-button"><i class="fas fa-book-reader"></i> Sight Words Flash Cards</a>
+
+</div><!-- End nav -->
+
+<!-- page inner background -->
+<div class="w3-container w3-pale-blue background">
+
+<!-- onload modal -->
+	<div class="w3-modal" id="directions">
+		<div class="w3-modal-content w3-light-grey w3-container">
+			<span onclick="toggleModal('directions')" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
+			<p>Kids, read the word that appears in the purple box.</p>
+			<p>Parents, mark your kid's response as right or wrong. You can always retry a word later from the problem history.</p>
+			<p>You can adjust the time it takes to display a new problem after marking it right or wrong under Options.</p> 
+			<p></p>
+		</div>
+	</div> 
+	
+<!-- header -->
+<div class="w3-bar w3-panel w3-deep-purple w3-animate-top">
+<h2><span class="w3-bar-item w3-wide">Sight Words Flash Cards</span>
+	<div class="w3-bar-item w3-right">
+		<button class="w3-deep-purple w3-button w3-large" id="options" onclick="toggleModal('optionPane')">Options</button>
+		<!-- modal options screen -->
+		<div class="w3-modal" id="optionPane" style="display:none">
+			<div class="w3-modal-content w3-light-grey w3-container">
+				<span onclick="toggleModal('optionPane')" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
+				<p>Speed:<input type="range" id="speed" min="0" max="20" value="10" onchange="updateSpeed()">
+					<span class="w3-large w3-tooltip"><i class="fas fa-question-circle"></i> 
+						<em class="w3-text w3-animate-right">Adjusts the amount of time between answering one question and loading the next question.</em>
+					</span>
+				</p>
+				<p class="w3-bar">
+					<span class="w3-bar-item">Word Lists: </span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('pkwl')" id="pkwl" value="pkwl" checked><label>Pre-K</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('kwl')" id="kwl" value="kwl" checked><label>K</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('fwl')" id="fwl" value="fwl"><label>1st</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('swl')" id="swl" value="swl"><label>2nd</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('twl')" id="twl" value="3wl"><label>3rd</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('nouns')" id="nouns" value="nouns"><label>Nouns</label></span>
+				</p>
+				<button id="resetGame" onclick="resetGame()">Reset Game</button>
+			</div>
+		</div> <!-- end modal options screen -->
+		<button class="w3-deep-purple w3-button" id="volume" onclick="muter()"><i class="fas fa-volume-mute"></i></button>
+	</div>
+</h2>
+</div>
+
+<!-- Timer / Score Keeper -->
+<div class="w3-teal w3-animate-top w3-xlarge" style="height:40px">
+  <div class="w3-display-topleft" id="timeClock"> 05:00 </div>
+  <div class="w3-display-topright" id="hitRate">Correct 0 / 0 </div> 
+</div>
+
+
+<!-- Problem -->
+<div class="w3-panel">
+<div class="w3-panel w3-card w3-purple w3-center w3-middle w3-threequarter w3-xxxlarge w3-animate-left" id="problem">
+WORDS! 
+</div>
+
+<!-- Answer Panel -->
+<div class="w3-center w3-panel w3-light-grey w3-quarter w3-animate-right w3-hover-shadow">
+	<button class="w3-button w3-xlarge w3-green answer" onclick="answer('yes')"><i class="fas fa-check"></i></button>
+	<button class="w3-button w3-xlarge w3-red answer" onclick="answer('no')"><i class="fas fa-times"></i> </button>
+	<br/>
+	<button class="w3-button w3-xlarge answer" onclick="answer('skip')">skip</button>
+</div> <!-- End Answer Panel -->
+</div> <!-- end Problem area -->
+<!-- Problem Timer -->
+<div class="w3-center">
+<div class="w3-round-xlarge w3-indigo w3-bar w3-tiny" id="probTimerBar">
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+</div>
+</div>
+<!-- History -->
+<div>
+	<button class="w3-button w3-teal w3-large" onclick="toggleHist()" id="histT">Show history <i class="fa fa-chevron-down"></i></button>
+</div>
+<div class="w3-light-grey w3-topleft w3-animate-bottom w3-card w3-panel" style="display:none" id="hist">
+	<div class="w3-bar-item">Problem History</div>
+</div>
+<!-- end History -->
+
+</div> <!-- End inner background -->
+</div> <!-- end outer background -->
+</body>
+
+<!-- footer -->
+<div class="w3-container w3-blue">
+<footer class="w3-bar w3-light-blue w3-border w3-round-xlarge">
+	<a class="w3-bar-item w3-button" href="index.html"><i class="fas fa-home"></i> Home</a>
+</footer>
+</div>
+
+<script>
+let pkwl = ["a", "and", "away", "big", "blue", "can", "come", "down", "find", "for", "funny", "go", "help", "here", "I", "in", "is", "it", "jump", "little", "look", "make", "me", "my", "not", "one", "play", "red", "run", "said", "see", "the", "three", "to", "two", "up", "we", "where", "yellow", "you"];
+let kwl = ["all", "am", "are", "at", "ate", "be", "black", "brown", "but", "came", "did", "do", "eat", "four", "get", "good", "have", "he", "into", "like", "must", "new", "no", "now", "on", "our", "out", "please", "pretty", "ran", "ride", "saw", "say", "she", "so", "soon", "that", "there", "they", "this", "too", "under", "want", "was", "well", "went", "what", "white", "who", "will", "with", "yes"];
+let fwl = ["after", "again", "an", "any", "as", "ask", "by", "could", "every", "fly", "from", "give", "going", "had", "has", "her", "him", "his", "how", "just", "know", "let", "live", "may", "of", "old", "once", "open", "over", "put", "round", "some", "stop", "take", "thank", "them", "then", "think", "walk", "were", "when"];
+let swl = ["always", "around", "because", "been", "before", "best", "both", "buy", "call", "cold", "does", "don’t", "fast", "first", "five", "found", "gave", "goes", "green", "its", "made", "many", "off", "or", "pull", "read", "right", "sing", "sit", "sleep", "tell", "their", "these", "those", "upon", "us", "use", "very", "wash", "which", "why", "wish", "work", "would", "write", "your"];
+let twl = ["about", "better", "bring", "carry", "clean", "cut", "done", "draw", "drink", "eight", "fall", "far", "full", "got", "grow", "hold", "hot", "hurt", "if", "keep", "kind", "laugh", "light", "long", "much", "myself", "never", "only", "own", "pick", "seven", "shall", "show", "six", "small", "start", "ten", "today", "together", "try", "warm"];
+let nouns = ["apple", "baby", "back", "ball", "bear", "bed", "bell", "bird", "birthday", "boat", "box", "boy", "bread", "brother", "cake", "car", "cat", "chair", "chicken", "children", "Christmas", "coat", "corn", "cow", "day", "dog", "doll", "door", "duck", "egg", "eye", "farm", "farmer", "father", "feet", "fire", "fish", "floor", "flower", "game", "garden", "girl", "goodbye", "grass", "ground", "hand", "head", "hill", "home", "horse", "house", "kitty", "leg", "letter", "man", "men", "milk", "money", "morning", "mother", "name", "nest", "night", "paper", "party", "picture", "pig", "rabbit", "rain", "ring", "robin", "Santa Claus", "school", "seed", "sheep", "shoe", "sister", "snow", "song", "squirrel", "stick", "street", "sun", "table", "thing", "time", "top", "toy", "tree", "watch", "water", "way", "wind", "window", "wood"];
+var wordList = [];
+var checkedList = [];
+//let wordList = ["a", "about", "after", "again", "all"];
+var shuffledList = [];
+var count = 0;
+var correct = 0;
+var rflag = false;
+var mute = true;
+var refreshSpeed = 1000; // 1 second, the delay between answering a question and displaying the next question.
+var timeLimit = 300000; // 5 minutes, the amount of time the game will accept responses. Don't overdo it kids!
+//var timeLimit = 15000; // 15 seconds
+var probSecondTimer = 10; // variable which tracks the number of seconds remaining in the problem timer
+var probSecondTimerOn = true;
+var newProbTimer; // variable which contains the timeOut function for refreshSpeed
+var timer; // variable which contains the interval function for timeLimit
+var flagTimeUp = false;
+var flashTime;
+var showHistFlag = false;
+var changeFlag = true;
+
+
+
+updateCheckedList('pkwl');
+updateCheckedList('kwl');
+document.getElementById("directions").style.display = "block";
+
+function updateCheckedList(bID){
+	var box = document.getElementById(bID.toString());
+	if(box.checked){ //add it
+		checkedList.push(bID);
+	}
+	else{ //remove it
+		for(i =0; i<checkedList.length; i++){
+			if(checkedList[i]==bID){
+				checkedList.splice(i,1);
+			}
+		}
+	}
+	updateWordList();
+}
+
+function updateWordList(){
+	wordPool = [];
+	shuffledList = [];
+	for (i = 0; i<checkedList.length; i++){
+		
+		switch (checkedList[i]){
+			case "pkwl":
+			wordPool = wordPool.concat(pkwl);
+			break;
+			case "kwl":
+			wordPool = wordPool.concat(kwl);
+			break;
+			case "fwl":
+			wordPool = wordPool.concat(fwl);
+			break;
+			case "swl":
+			wordPool = wordPool.concat(swl);
+			break;
+			case "twl":
+			wordPool = wordPool.concat(twl);
+			break;
+			case "nouns":
+			wordPool = wordPool.concat(nouns);
+			break;
+		}
+	}
+	wordList = []; // clear the word list
+	wordList = wordList.concat(wordPool); // refill the word list
+	shuffle(); // shuffle the word list 
+	changeFlag = true;
+}
+
+function shuffle(){
+	var picker;
+	var wordPool = [].concat(wordList);
+	while(wordPool.length > 0){
+		picker = Math.floor(Math.random() * wordPool.length);
+		shuffledList.push(wordPool[picker]);
+		wordPool.splice(picker,1);		
+	}
+}
+
+function newProblem(){
+	if(shuffledList.length == 0) shuffle();
+	var newWord = shuffledList.shift();
+	document.getElementById("problem").innerHTML = newWord;
+	enableAnswerPanel();
+	enableRetry();
+	probSecondTimer = 10;
+	updateProbSecondTimer();
+	probSecondTimerOn = true;
+}
+
+function addToHist(problem){
+	disableAnswerPanel();
+	disableRetry();
+	probSecondTimerOn = false;
+	var element = document.getElementById("hist");
+	element.appendChild(problem);
+	if(!flagTimeUp) newProbTimer = setTimeout(newProblem,refreshSpeed);
+}
+
+function skip(){
+	answer('skip');
+}
+
+function answer(resp){
+	disableRetry();
+	if(!flagTimeUp){
+		var word = document.getElementById("problem").innerHTML;
+		var histButton = document.createElement("button");
+		histButton.setAttribute("class","w3-round w3-border-green w3-animate-zoom w3-large");
+		histButton.id = "w"+count+","+word;
+		//console.log(resp);
+		if(!rflag)count++;
+		if (resp=="yes"){
+			histButton.innerHTML = word + " &#x02713";
+			correct++;
+			document.getElementById("problem").innerHTML += ' <i class="fas fa-check w3-green"></i>';
+			if(!mute)document.getElementById("rightSound").play();
+		}
+		else if(resp=="skip"){
+			histButton.innerHTML = word + " -";
+			histButton.setAttribute("class","w3-round w3-yellow w3-border-yellow w3-animate-zoom w3-large w3-hover-shadow");
+			histButton.setAttribute("onclick","retry('"+histButton.id+"')");
+			document.getElementById("problem").innerHTML += " <span class='w3-yellow'>-</span>";
+		}
+		else{
+			histButton.innerHTML = word + ' <i class="fas fa-times"></i>';
+			histButton.setAttribute("class","w3-round w3-red w3-border-red w3-animate-zoom w3-large w3-hover-shadow");
+			histButton.setAttribute("onclick","retry('"+histButton.id+"')");
+			document.getElementById("problem").innerHTML += ' <span class="w3-red"><i class="fas fa-times"></i></span>';
+			if(!mute)document.getElementById("wrongSound").play();
+		}
+		document.getElementById("hitRate").innerHTML = "Correct: " + correct + " / " + count;
+		addToHist(histButton);
+		rflag = false;
+	}
+}
+
+function retry(problemID){
+	disableRetry();
+	if(!flagTimeUp){
+		shuffledList.unshift(document.getElementById('problem').innerHTML);
+		var expr = problemID.split(",");
+		document.getElementById("problem").innerHTML = expr[1];
+		var elmt = document.getElementById(problemID);
+		elmt.remove();
+		rflag = true;
+		probSecondTimer=10;
+		updateProbSecondTimer();		
+	}
+}
+function toggleHist()
+{
+	if(!showHistFlag){
+		document.getElementById("histT").innerHTML = 'Hide history <i class="fas fa-chevron-up"></i>';
+		document.getElementById("hist").style.display = "block";
+		showHistFlag = true;
+	}
+	else{
+		document.getElementById("histT").innerHTML = 'Show history <i class="fas fa-chevron-down"></i>';
+		document.getElementById("hist").style.display = "none";
+		showHistFlag = false;
+	}
+}
+
+function toggleModal(pane){
+	thisPane = document.getElementById(pane);
+	if(pane=="directions"){
+//		if(thisPane.style.display=="block"){
+			thisPane.style.display = "none";
+			document.getElementById('optionPane').style.display = 'block';
+/*		}
+		else{
+			thisPane.style.display="block";
+		} */
+	}
+	if(pane=="optionPane"){
+		if(thisPane.style.display == "none"){
+			thisPane.style.display = "block";
+			pauseCountDown();
+		}
+		else{
+			thisPane.style.display = "none";
+			startCountDown();
+			if(changeFlag){
+				changeFlag = false;
+				newProblem();
+			}
+		}
+	}
+}
+
+function updateSpeed(){
+	refreshSpeed = (20 - document.getElementById("speed").value) * 100;
+}
+
+// the following functions are used to prevent input while animations/transitions are occuring
+function disableAnswerPanel(){
+	answerPanel = document.getElementsByClassName("w3-button w3-xlarge answer");
+	var i;
+	for(i=0;i<answerPanel.length;i++){
+		answerPanel[i].setAttribute("disabled","");
+	}
+}
+function enableAnswerPanel(){
+	answerPanel = document.getElementsByClassName("w3-button w3-xlarge answer");
+	var i;
+	for(i=0;i<answerPanel.length;i++){
+		answerPanel[i].removeAttribute("disabled");
+	}
+}
+function disableRetry(){
+	var probs = document.getElementsByClassName("w3-round w3-red w3-border-red w3-animate-zoom w3-large w3-hover-shadow");
+	var i;
+	for(i=0; i<probs.length; i++){
+		probs[i].setAttribute("disabled","");		
+	}
+	probs = document.getElementsByClassName("w3-round w3-yellow w3-border-yellow w3-animate-zoom w3-large w3-hover-shadow");
+	for(i=0; i<probs.length; i++){
+		probs[i].setAttribute("disabled","");		
+	}
+}
+function enableRetry(){
+	var probs = document.getElementsByClassName("w3-round w3-red w3-border-red w3-animate-zoom w3-large w3-hover-shadow");
+	var i;
+	for(i=0; i<probs.length; i++){
+		probs[i].removeAttribute("disabled");		
+	}
+	probs = document.getElementsByClassName("w3-round w3-yellow w3-border-yellow w3-animate-zoom w3-large w3-hover-shadow")
+	for(i=0; i<probs.length; i++){
+		probs[i].removeAttribute("disabled");		
+	}
+}
+// togle sound
+function muter(){
+	if(mute){
+		mute = false;
+		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i>';
+		//document.getElementById("loadSound").play();
+		return(0);
+	}
+	else{
+		mute = true;
+		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i><i class="fas fa-times"></i>';
+		//document.getElementById("loadSound").pause();
+	}
+}
+
+function resetGame(){
+	clearInterval(timer);
+	document.getElementById("hist").innerHTML='<div class="w3-bar-item">Problem History</div>';
+	resetCountDown();
+	count = 0;
+	correct = 0;
+	probSecondTimer = 10;
+	updateProbSecondTimer();
+	document.getElementById("hitRate").innerHTML = "Correct: " + correct + " / " + count;
+	changeFlag = true;
+}
+
+ //keep time
+// Set the date we're counting down to
+
+function pauseCountDown(){
+	clearInterval(timer);
+}
+function resetCountDown(){
+	timeLimit = 300000;
+	clearInterval(flashTime);
+	document.getElementById("timeClock").classList.remove("w3-text-red","w3-hide");
+	updateClock(timeLimit);
+}
+function startCountDown(){
+	// Update the count down every 1 second
+	timer = setInterval(function() {
+	updateClock(timeLimit);
+	  // If the count down is finished, write some text
+	  if (timeLimit <= 0) {
+		clearInterval(timer);
+		document.getElementById("timeClock").innerHTML = "00:00";
+		document.getElementById("timeClock").classList.add("w3-text-red");
+		flashTime();
+		flagTimeUp = true;
+	  }
+	timeLimit -= 1000;
+}, 1000); 
+}
+
+function updateClock(time){
+	// Time calculations for days, hours, minutes and seconds
+	  var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((time % (1000 * 60)) / 1000);
+	  var m = minutes.toString();
+	  var s = seconds.toString();
+	  if(minutes<10) m = "0"+minutes.toString();
+	  if(seconds<10) s = "0"+seconds.toString();
+
+	  // Display the result in the element with id="timeClock"
+	  document.getElementById("timeClock").innerHTML = m + ":" + s;
+	  if(probSecondTimer>=0 && probSecondTimerOn) probSecondTimer--;
+	  if(probSecondTimer == 0 && !flagTimeUp && probSecondTimerOn) skip();
+	  updateProbSecondTimer();
+}
+function updateProbSecondTimer(){
+	if(probSecondTimer>-1){
+		var e = "";
+		for(i=0;i<probSecondTimer;i++){
+			e += "<i class='w3-bar-item w3-text-yellow fas fa-circle'></i>";	
+		}
+		for(i=0;i<(10-probSecondTimer);i++){
+			e += "<i class='w3-bar-item w3-text-yellow far fa-circle'></i>";
+		}
+		document.getElementById("probTimerBar").innerHTML = e;
+	}
+}
+
+function flashTime(){
+	flashTime = setInterval(function(){
+		document.getElementById("timeClock").classList.toggle("w3-hide");
+	},1000);	
+}
+</script>
+</html>
