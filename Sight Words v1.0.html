@@ -411,14 +411,14 @@ function enableRetry(){
 function muter(){
 	if(mute){
 		mute = false;
-		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i>';
+		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-up"></i>';
 		introSound.play();
 		introSound.volume= .10;
 		return(0);
 	}
 	else{
 		mute = true;
-		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i><i class="fas fa-times"></i>';
+		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-mute"></i>';
 		introSound.pause();
 		return(0);
 	}
