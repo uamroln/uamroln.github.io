@@ -198,11 +198,11 @@ var flashTime;
 var changeFlag = true;
 var showHistFlag = false;
 
-/*var introSound = document.getElementById("loadSound");
-introSound.volume = 0.25;
-introSound.autoplay = true;
+var introSound = document.getElementById("loadSound");
+//introSound.volume = 0.25;
+//introSound.autoplay = true;
 introSound.loop = true;
-introSound.load();*/
+introSound.load();
 
 document.getElementById("directions").style.display = "block";
 
@@ -386,13 +386,15 @@ function muter(){
 	if(mute){
 		mute = false;
 		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-up"></i>';
-		//document.getElementById("loadSound").play();
+		introSound.play();
+		introSound.volume = .05;
 		return(0);
 	}
 	else{
 		mute = true;
 		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-mute"></i>';
-		//document.getElementById("loadSound").pause();
+		introSound.pause();
+		return(0);
 	}
 }
 

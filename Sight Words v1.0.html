@@ -30,9 +30,9 @@ body, html{
 <title>
 Nonsequitus Learning - Sight Words!
 </title>
-<!-- <audio id="loadSound">
+<audio id="loadSound">
 	<source src="Assets/Alley Dream.mp3" type="audio/mp3">
-</audio> -->
+</audio>
 <audio id="rightSound">
 	<source src="Assets/smb_coin.wav" type="audio/wav">
 </audio>
@@ -187,7 +187,11 @@ var flashTime;
 var showHistFlag = false;
 var changeFlag = true;
 
-
+var introSound = document.getElementById("loadSound");
+//introSound.volume = 0.25;
+//introSound.autoplay = true;
+introSound.loop = true;
+introSound.load();
 
 updateCheckedList('pkwl');
 updateCheckedList('kwl');
@@ -408,13 +412,15 @@ function muter(){
 	if(mute){
 		mute = false;
 		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i>';
-		//document.getElementById("loadSound").play();
+		introSound.play();
+		introSound.volume= .10;
 		return(0);
 	}
 	else{
 		mute = true;
 		document.getElementById("volume").innerHTML = '<i class="fa fa-volume-off"></i><i class="fas fa-times"></i>';
-		//document.getElementById("loadSound").pause();
+		introSound.pause();
+		return(0);
 	}
 }
 
