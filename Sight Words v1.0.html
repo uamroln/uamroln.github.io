@@ -90,12 +90,13 @@ Nonsequitus Learning - Sight Words!
 				</p>
 				<p class="w3-bar">
 					<span class="w3-bar-item">Word Lists: </span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('pkwl')" id="pkwl" value="pkwl" checked><label>Pre-K</label></span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('kwl')" id="kwl" value="kwl" checked><label>K</label></span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('fwl')" id="fwl" value="fwl"><label>1st</label></span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('swl')" id="swl" value="swl"><label>2nd</label></span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('twl')" id="twl" value="3wl"><label>3rd</label></span>
-					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('nouns')" id="nouns" value="nouns"><label>Nouns</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit1')" id="Unit1" value="Unit1" checked><label>Unit 1</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit2')" id="Unit2" value="Unit2" ><label>Unit 2</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit3')" id="Unit3" value="Unit3" ><label>Unit 3</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit4')" id="Unit4" value="Unit4" ><label>Unit 4</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit5')" id="Unit5" value="Unit5" ><label>Unit 5</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit6')" id="Unit4" value="Unit6" ><label>Unit 6</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit7')" id="Unit4" value="Unit7" ><label>Unit 7</label></span>
 				</p>
 				<button id="resetGame" onclick="resetGame()">Reset Game</button>
 			</div>
@@ -168,6 +169,12 @@ let fwl = ["after", "again", "an", "any", "as", "ask", "by", "could", "every", "
 let swl = ["always", "around", "because", "been", "before", "best", "both", "buy", "call", "cold", "does", "don’t", "fast", "first", "five", "found", "gave", "goes", "green", "its", "made", "many", "off", "or", "pull", "read", "right", "sing", "sit", "sleep", "tell", "their", "these", "those", "upon", "us", "use", "very", "wash", "which", "why", "wish", "work", "would", "write", "your"];
 let twl = ["about", "better", "bring", "carry", "clean", "cut", "done", "draw", "drink", "eight", "fall", "far", "full", "got", "grow", "hold", "hot", "hurt", "if", "keep", "kind", "laugh", "light", "long", "much", "myself", "never", "only", "own", "pick", "seven", "shall", "show", "six", "small", "start", "ten", "today", "together", "try", "warm"];
 let Unit1 = ["am", "an", "and", "ask", "at", "ate", "best", "big", "one", "two", "three", "the", "black", "bring", "but", "came", "can", "cut", "did", "fast", "a", "blue", "yellow", "five", "gave", "get", "got", "green", "had", "has", "help", "look", "I", "are", "litle", "here", "him", "his", "hot", "if", "in", "is", "it", "down", "out", "of", "funny", "its", "jump", "just", "let", "long", "much", "must", "off", "all", "from", "was", "when", "on", "not", "pick", "ran", "red", "run", "shall", "sing", "why", "to", "where", "no", "sit", "six", "stop", "tell", "ten", "that", "them", "what", "so", "which", "once", "said", "then", "this", "up", "us", "went", "will", "well", "were", "here", "there", "my", "by", "wish", "with", "yes", "is", "who", "some", "word", "says"];
+let Unit2 = ["ate", "came", "five", "gave", "green", "keep", "like", "make", "made", "ride", "see", "sleep", "take", "those", "three", "use", "he", "she", "be", "me", "we", "they", "their", "your"];
+let Unit3 = ["draw", "found", "good", "look", "our", "out", "round", "saw", "soon", "too", "have", "down", "could", "would", "because", "should"];
+let Unit4 = ["after", "better", "far", "for", "her", "into", "myself", "never", "or", "seven", "start", "under", "upon", "today", "tomorrow", "yesterday"];
+let Unit5 = ["write", "how", "picture"];
+let Unit6 = ["drink", "thank", "think", "white"];
+let Unit7 = ["goes", "may", "play", "say"];
 let nouns = ["apple", "baby", "back", "ball", "bear", "bed", "bell", "bird", "birthday", "boat", "box", "boy", "bread", "brother", "cake", "car", "cat", "chair", "chicken", "children", "Christmas", "coat", "corn", "cow", "day", "dog", "doll", "door", "duck", "egg", "eye", "farm", "farmer", "father", "feet", "fire", "fish", "floor", "flower", "game", "garden", "girl", "goodbye", "grass", "ground", "hand", "head", "hill", "home", "horse", "house", "kitty", "leg", "letter", "man", "men", "milk", "money", "morning", "mother", "name", "nest", "night", "paper", "party", "picture", "pig", "rabbit", "rain", "ring", "robin", "Santa Claus", "school", "seed", "sheep", "shoe", "sister", "snow", "song", "squirrel", "stick", "street", "sun", "table", "thing", "time", "top", "toy", "tree", "watch", "water", "way", "wind", "window", "wood"];
 var wordList = [];
 var checkedList = [];
