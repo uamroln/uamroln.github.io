@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sight Words Flash Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .flash-card {
+            width: 400px;
+            height: 300px;
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .flash-card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .word {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="flash-card" onclick="flipCard(this)">
+    <div class="card-content">
+        <div class="word">
+            <p id="WordSpace">Let's Start!</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+var wordList = ["am", "an", "and", "ask", "at", "ate", "best", "big", "one", "two", "three", "the", "black", "bring", "but", "came", "can", "cut", "did", "fast", "a", "blue", "yellow", "five", "gave", "get", "got", "green", "had", "has", "help", "look", "I", "are", "litle", "here", "him", "his", "hot", "if", "in", "is", "it", "down", "out", "of", "funny", "its", "jump", "just", "let", "long", "much", "must", "off", "all", "from", "was", "when", "on", "not", "pick", "ran", "red", "run", "shall", "sing", "why", "to", "where", "no", "sit", "six", "stop", "tell", "ten", "that", "them", "what", "so", "which", "once", "said", "then", "this", "up", "us", "went", "will", "well", "were", "here", "there", "my", "by", "wish", "with", "yes", "is", "who", "some", "word", "says", "keep", "like", "make", "made", "ride", "see", "sleep", "take", "those", "use", "he", "she", "be", "me", "we", "they", "their", "your", "draw", "found", "good", "our", "out", "round", "saw", "soon", "too", "have", "down", "could", "would", "because", "should", "after", "better", "far", "for", "her", "into", "myself", "never", "or", "seven", "start", "under", "upon", "today", "tomorrow", "yesterday", "write", "how", "picture", "drink", "thank", "think", "white", "goes", "may", "play", "say"];
+var curWord= wordList.shift();
+wordList.push(curWord);
+
+    function flipCard(card) {
+	document.getElementById("WordSpace").innerHTML = curWord;
+	curWord= wordList.shift();
+	wordList.push(curWord);
+    }
+
+</script>
+
+</body>
+</html>
