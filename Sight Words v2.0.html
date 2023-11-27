@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sight Words Flash Cards</title>
-    <style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179401054-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-179401054-1');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Matt Rolniak">
+<meta name="description" content="Sight Words">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://kit.fontawesome.com/eff118460a.js" crossorigin="anonymous"></script>
+<style>
+.background{
+	height:100%;
+}
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -42,11 +57,96 @@
             font-weight: bold;
             text-align: center;
         }
+</style>
 
-    </style>
+</head><title>Sight Words Flash Cards</title>
+
+<audio id="loadSound">
+	<source src="Assets/Alley Dream.mp3" type="audio/mp3">
+</audio>
+<audio id="rightSound">
+	<source src="Assets/smb_coin.wav" type="audio/wav">
+</audio>
+<audio id="wrongSound">
+	<source src="Assets/smb_pipe.wav" type="audio/wav">
+</audio>
 </head>
-<body>
 
+<body>
+<!-- Main Header -->
+<div class="w3-container w3-blue-gray w3-wide" id="header">
+<h1>Nonsequitus Learning</h1>
+</div><!-- End Main header -->
+
+<!-- page outer background -->
+<div class="w3-container w3-blue background">
+
+<!-- Nav -->
+<div class="w3-bar w3-light-blue w3-border w3-round-xlarge"  id="nav">
+
+<a href="https://uamroln.github.io" class="w3-bar-item w3-button">GitHub</a>
+<a href="Learn_Home.html" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
+<a href="Math Flash Cards v1.3.html" class="w3-bar-item w3-button"><i class="fas fa-plus"></i> Math Addition Flash Cards</a>
+<a href="Sight Words v1.0.html" class="w3-bar-item w3-button"><i class="fas fa-book-reader"></i> Sight Words Flash Cards</a>
+
+</div><!-- End nav -->
+
+<!-- page inner background -->
+<div class="w3-container w3-pale-blue background">
+
+<!-- onload modal -->
+	<div class="w3-modal" id="directions">
+		<div class="w3-modal-content w3-light-grey w3-container">
+			<span onclick="toggleModal('directions')" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
+			<p>Kids, read the word that appears in the purple box.</p>
+			<p>Parents, mark your kid's response as right or wrong. You can always retry a word later from the problem history.</p>
+			<p>You can adjust the time it takes to display a new problem after marking it right or wrong under Options.</p> 
+			<p></p>
+		</div>
+	</div> 
+	
+<!-- header -->
+<div class="w3-bar w3-panel w3-deep-purple w3-animate-top">
+<h2><span class="w3-bar-item w3-wide">Sight Words Flash Cards</span>
+	<div class="w3-bar-item w3-right">
+		<button class="w3-deep-purple w3-button w3-large" id="options" onclick="toggleModal('optionPane')">Options</button>
+		<!-- modal options screen -->
+		<div class="w3-modal" id="optionPane" style="display:none">
+			<div class="w3-modal-content w3-light-grey w3-container">
+				<span onclick="toggleModal('optionPane')" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
+				<p>Speed:<input type="range" id="speed" min="0" max="20" value="10" onchange="updateSpeed()">
+					<span class="w3-large w3-tooltip"><i class="fas fa-question-circle"></i> 
+						<em class="w3-text w3-animate-right">Adjusts the amount of time between answering one question and loading the next question.</em>
+					</span>
+				</p>
+				<p class="w3-bar">
+					<span class="w3-bar-item">Word Lists: </span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit1')" id="Unit1" value="Unit1" checked><label>Unit 1</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit2')" id="Unit2" value="Unit2" ><label>Unit 2</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit3')" id="Unit3" value="Unit3" ><label>Unit 3</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit4')" id="Unit4" value="Unit4" ><label>Unit 4</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit5')" id="Unit5" value="Unit5" ><label>Unit 5</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit6')" id="Unit4" value="Unit6" ><label>Unit 6</label></span>
+					<span class="w3-bar-item checkbox"><input type="checkbox" onclick="updateCheckedList('Unit7')" id="Unit4" value="Unit7" ><label>Unit 7</label></span>
+				</p>
+				<button id="resetGame" onclick="resetGame()">Reset Game</button>
+			</div>
+		</div> <!-- end modal options screen -->
+		<button class="w3-deep-purple w3-button" id="volume" onclick="muter()"><i class="fas fa-volume-mute"></i></button>
+	</div>
+</h2>
+</div>
+
+<!-- Timer / Score Keeper -->
+<div class="w3-teal w3-animate-top w3-xlarge" style="height:40px">
+  <div class="w3-display-topleft" id="timeClock"> 05:00 </div>
+  <div class="w3-display-topright" id="hitRate">Correct 0 / 0 </div> 
+</div>
+
+
+<!-- Problem -->
+<div class="w3-panel">
+<div class="w3-panel w3-card w3-purple w3-center w3-middle w3-threequarter w3-xxxlarge w3-animate-left" id="problem">
 <div class="flash-card" onclick="flipCard(this)">
     <div class="card-content">
         <div class="word">
@@ -54,8 +154,50 @@
         </div>
     </div>
 </div>
+</div>
 
+<!-- Answer Panel -->
+<div class="w3-center w3-panel w3-light-grey w3-quarter w3-animate-right w3-hover-shadow">
+	<button class="w3-button w3-xlarge w3-green answer" onclick="answer('yes')"><i class="fas fa-check"></i></button>
+	<button class="w3-button w3-xlarge w3-red answer" onclick="answer('no')"><i class="fas fa-times"></i> </button>
+	<br/>
+	<button class="w3-button w3-xlarge answer" onclick="answer('skip')">skip</button>
+</div> <!-- End Answer Panel -->
+</div> <!-- end Problem area -->
+<!-- Problem Timer -->
+<div class="w3-center">
+<div class="w3-round-xlarge w3-indigo w3-bar w3-tiny" id="probTimerBar">
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+	<i class="w3-bar-item w3-text-yellow fas fa-circle"></i>
+</div>
+</div>
+<!-- History -->
+<div>
+	<button class="w3-button w3-teal w3-large" onclick="toggleHist()" id="histT">Show history <i class="fa fa-chevron-down"></i></button>
+</div>
+<div class="w3-light-grey w3-topleft w3-animate-bottom w3-card w3-panel" style="display:none" id="hist">
+	<div class="w3-bar-item">Problem History</div>
+</div>
+<!-- end History -->
 
+</div> <!-- End inner background -->
+</div> <!-- end outer background -->
+</body>
+
+<!-- footer -->
+<div class="w3-container w3-blue">
+<footer class="w3-bar w3-light-blue w3-border w3-round-xlarge">
+	<a class="w3-bar-item w3-button" href="Learn_Home.html"><i class="fas fa-home"></i> Home</a>
+</footer>
+</div>
 <script>
 
 var wordList = ["am", "an", "and", "ask", "at", "ate", "best", "big", "one", "two", "three", "the", "black", "bring", "but", "came", "can", "cut", "did", "fast", "a", "blue", "yellow", "five", "gave", "get", "got", "green", "had", "has", "help", "look", "I", "are", "little", "here", "him", "his", "hot", "if", "in", "is", "it", "down", "out", "of", "funny", "its", "jump", "just", "let", "long", "much", "must", "off", "all", "from", "was", "when", "on", "not", "pick", "ran", "red", "run", "shall", "sing", "why", "to", "where", "no", "sit", "six", "stop", "tell", "ten", "that", "them", "what", "so", "which", "once", "said", "then", "this", "up", "us", "went", "will", "well", "were", "here", "there", "my", "by", "wish", "with", "yes", "is", "who", "some", "word", "says", "keep", "like", "make", "made", "ride", "see", "sleep", "take", "those", "use", "he", "she", "be", "me", "we", "they", "their", "your", "draw", "found", "good", "our", "out", "round", "saw", "soon", "too", "have", "down", "could", "would", "because", "should", "after", "better", "far", "for", "her", "into", "myself", "never", "or", "seven", "start", "under", "upon", "today", "tomorrow", "yesterday", "write", "how", "picture", "drink", "thank", "think", "white", "goes", "may", "play", "say"];
