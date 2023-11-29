@@ -1,74 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sight Words Flash Cards</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179401054-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        .flash-card {
-            width: 400px;
-            height: 300px;
-            border: 2px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
+  gtag('config', 'UA-179401054-1');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Matt Rolniak">
+<meta name="description" content="Sight Words">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://kit.fontawesome.com/eff118460a.js" crossorigin="anonymous"></script>
+<style>
+body, html{
+	height:100%;
+	margin:0;
+}
+.background{
+	height:100%;
+}
+.flash-card {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        .flash-card:hover {
-            transform: scale(1.05);
-        }
+    width: 400px;
+    height: 300px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
 
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+.flash-card:hover {
+    transform: scale(1.05);
+}
 
-        .word {
-            font-size: 48px;
-            font-weight: bold;
-            text-align: center;
-        }
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
-    </style>
+.word {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+}
+
+</style>
+
 </head>
-<body>
+<title>
+Nonsequitus Learning - Sight Words Flash Cards
+</title>
+<audio id="loadSound">
+	<source src="Assets/Alley Dream.mp3" type="audio/mp3">
+</audio>
+</head>
 
-<div class="flash-card" onclick="flipCard(this)">
-    <div class="card-content">
-        <div class="word">
-            <p id="WordSpace">Let's Start!</p>
+<body>
+<!-- Main Header -->
+<div class="w3-container w3-blue-gray w3-wide" id="header">
+<h1>Nonsequitus Learning</h1>
+</div><!-- End Main header -->
+
+<!-- page outer background -->
+<div class="w3-container w3-blue background">
+
+<!-- Nav -->
+<div class="w3-bar w3-light-blue w3-border w3-round-xlarge"  id="nav">
+
+<a href="https://uamroln.github.io" class="w3-bar-item w3-button">GitHub</a>
+<a href="Learn_Home.html" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
+<a href="Math Flash Cards v1.3.html" class="w3-bar-item w3-button"><i class="fas fa-plus"></i> Math Addition Flash Cards</a>
+<a href="Sight Words v1.0.html" class="w3-bar-item w3-button"><i class="fas fa-book-reader"></i> Sight Words Flash Cards</a>
+<a href="Sight Words v2.0.html" class="w3-bar-item w3-button"><i class="fas fa-book-reader"></i> Sight Words Flash Cards v2</a>
+
+</div><!-- End nav -->
+
+<!-- page inner background -->
+<div class="w3-container w3-pale-blue background">
+	
+<!-- header -->
+<div class="w3-bar w3-panel w3-deep-purple w3-animate-top">
+<h2><span class="w3-bar-item w3-wide">Sight Words Flash Cards</span>
+	<div class="w3-bar-item w3-right">
+		<button class="w3-deep-purple w3-button" id="volume" onclick="muter()"><i class="fas fa-volume-mute"></i></button>
+	</div>
+</h2>
+</div>
+<div class="w3-display-middle">
+    <div class="flash-card w3-white" onclick="flipCard(this)">
+        <div class="card-content">
+            <div class="word">
+                <p id="WordSpace">Let's Start!</p>
+            </div>
         </div>
     </div>
 </div>
+</div> <!-- End inner background -->
+</div> <!-- end outer background -->
+</body>
+
+<!-- footer -->
+<div class="w3-container w3-blue">
+<footer class="w3-bar w3-light-blue w3-border w3-round-xlarge">
+	<a class="w3-bar-item w3-button" href="Learn_Home.html"><i class="fas fa-home"></i> Home</a>
+</footer>
+
 
 
 <script>
+var mute = true;
+var introSound = document.getElementById("loadSound");
+introSound.loop = true;
+introSound.load();
+// togle sound
+function muter(){
+	if(mute){
+		mute = false;
+		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-up"></i>';
+		introSound.play();
+		introSound.volume= .05;
+		return(0);
+	}
+	else{
+		mute = true;
+		document.getElementById("volume").innerHTML = '<i class="fas fa-volume-mute"></i>';
+		introSound.pause();
+		return(0);
+	}
+}
 
-var wordList = ["am", "an", "and", "ask", "at", "ate", "best", "big", "one", "two", "three", "the", "black", "bring", "but", "came", "can", "cut", "did", "fast", "a", "blue", "yellow", "five", "gave", "get", "got", "green", "had", "has", "help", "look", "I", "are", "little", "here", "him", "his", "hot", "if", "in", "is", "it", "down", "out", "of", "funny", "its", "jump", "just", "let", "long", "much", "must", "off", "all", "from", "was", "when", "on", "not", "pick", "ran", "red", "run", "shall", "sing", "why", "to", "where", "no", "sit", "six", "stop", "tell", "ten", "that", "them", "what", "so", "which", "once", "said", "then", "this", "up", "us", "went", "will", "well", "were", "here", "there", "my", "by", "wish", "with", "yes", "is", "who", "some", "word", "says", "keep", "like", "make", "made", "ride", "see", "sleep", "take", "those", "use", "he", "she", "be", "me", "we", "they", "their", "your", "draw", "found", "good", "our", "out", "round", "saw", "soon", "too", "have", "down", "could", "would", "because", "should", "after", "better", "far", "for", "her", "into", "myself", "never", "or", "seven", "start", "under", "upon", "today", "tomorrow", "yesterday", "write", "how", "picture", "drink", "thank", "think", "white", "goes", "may", "play", "say"];
+var wordList = ["am", "an", "and", "ask", "at", "ate", "best", "big", "one", "two", "three", "the", "black", "bring", "but", "came", "can", "cut", "did", "fast", "a", "blue", "yellow", "five", "gave", "get", "got", "green", "had", "has", "help", "look", "I", "are", "litle", "here", "him", "his", "hot", "if", "in", "is", "it", "down", "out", "of", "funny", "its", "jump", "just", "let", "long", "much", "must", "off", "all", "from", "was", "when", "on", "not", "pick", "ran", "red", "run", "shall", "sing", "why", "to", "where", "no", "sit", "six", "stop", "tell", "ten", "that", "them", "what", "so", "which", "once", "said", "then", "this", "up", "us", "went", "will", "well", "were", "here", "there", "my", "by", "wish", "with", "yes", "is", "who", "some", "word", "says", "keep", "like", "make", "made", "ride", "see", "sleep", "take", "those", "use", "he", "she", "be", "me", "we", "they", "their", "your", "draw", "found", "good", "our", "out", "round", "saw", "soon", "too", "have", "down", "could", "would", "because", "should", "after", "better", "far", "for", "her", "into", "myself", "never", "or", "seven", "start", "under", "upon", "today", "tomorrow", "yesterday", "write", "how", "picture", "drink", "thank", "think", "white", "goes", "may", "play", "say"];
 var curWord= wordList.shift();
 wordList.push(curWord);
 
-    function flipCard(card) {
+function flipCard(card) {
 	document.getElementById("WordSpace").innerHTML = curWord;
 	curWord= wordList.shift();
 	wordList.push(curWord);
-    }
+}
 
 </script>
-
 </body>
 </html>
